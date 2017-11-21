@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const _ = require('lodash')
 module.exports = {
   getUserById: function (req, res, next) {
     User.find({
@@ -10,8 +11,8 @@ module.exports = {
   },
   signup: function (req, res, next) {
     var body = _.pick(req.body, ['name', 'email', 'password']);
-    User.find({
-      email: body.email
+    User.findOne({
+      email: req.body.email
     }, function (e, email) {
       if (e) throw e;
       if (email) return res.status(401).json({
@@ -20,9 +21,10 @@ module.exports = {
       const user = new User(body);
       user.save(function (e, user) {
         if (e) throw e;
-        res.status(200).json('使用者：' + user.email + '  註冊成功！');
+        res.status(200).json({
+          msg: '使用者：' + user.email + '  註冊成功！'
+        });
       });
     });
-  },
-
+  }
 }
