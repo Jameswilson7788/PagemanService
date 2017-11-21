@@ -1,5 +1,6 @@
-const User = require('../models/user')
-const _ = require('lodash')
+const User = require('../models/user');
+const _ = require('lodash');
+
 module.exports = {
   getUserById: function (req, res, next) {
     User.find({
