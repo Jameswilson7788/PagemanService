@@ -29,9 +29,7 @@ var userSchema = new Schema({
     }]
 });
 
-//before input to DataBase, Encrypt.
-userSchema.pre('save', function (next) {
-
+const __userBcrypt = function (next) {
     var user = this;
 
     if (!user.isModified('password')) return next();
@@ -42,17 +40,21 @@ userSchema.pre('save', function (next) {
             next();
         });
     });
-
-});
+}
+//before input to DataBase, Encrypt.
+userSchema.pre('save', __userBcrypt);
 
 userSchema.methods.comparePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 }
+
 userSchema.methods.gravatar = function (size) {
     if (!this.size) size = 200;
     if (!this.email) return 'https://gravatar.com/avatar/?s' + size + '&d=retro';
     var md5 = crypto.createHash('md5').update(this.email).digest('hex');
     return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
 }
+
+userSchema.methods.userBcrypt = __userBcrypt;
 
 module.exports = mongoose.model('User', userSchema);

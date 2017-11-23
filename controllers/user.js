@@ -29,6 +29,12 @@ module.exports = {
     });
   },
   login: function (req, res, next) {
-    var body = _.pick(req.body, ['email', 'password']);
+    const body = _.pick(req.body, ['email', 'password']);
+    User.findOne({
+      email: body.email
+    }, function (e, user) {
+      if (e) throw e;
+      
+    });
   }
 }
