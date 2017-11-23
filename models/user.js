@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 /* The user schema attribute / charcteristics / fields */
 var userSchema = new Schema({
-
+    name: String,
     email: {
         type: String,
         unique: true,
@@ -14,17 +14,10 @@ var userSchema = new Schema({
     },
     password: String,
 
-    profile: {
-        name: {
-            type: String,
-            default: ''
-        },
-        picture: {
-            type: String,
-            default: ''
-        }
+    picture: {
+        type: String,
+        default: ''
     },
-
     address: String,
     history: [{
         date: Date,

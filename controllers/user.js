@@ -27,5 +27,8 @@ module.exports = {
         });
       });
     });
+  },
+  login: function (req, res, next) {
+    var body = _.pick(req.body, ['email', 'password']);
   }
 }
