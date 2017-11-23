@@ -10,7 +10,7 @@ module.exports = {
     },
     verify: function (token) {
         return function (req, res, next) {
-            jwt.verify(token, secretKey, function (e, decoded) {
+            jwt.verify(token, secretKey, function (e, decode) {
                 if(e) throw e;
                 res.status(200).send(decode);
             });

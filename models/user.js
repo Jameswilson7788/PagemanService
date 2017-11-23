@@ -19,6 +19,7 @@ var userSchema = new Schema({
         default: ''
     },
     address: String,
+    token: String,
     history: [{
         date: Date,
         paid: {
