@@ -1,7 +1,10 @@
-
-
+const Pageman = require('../models/pageman');
+const _ = require('lodash');
 module.exports = {
-  create: function() {
+  
+  submit: function (req, res, next) {
+    const body = _.pick(req.body,['title', 'body']);
+    const pageman = new Pageman(body);
     
   }
 }
