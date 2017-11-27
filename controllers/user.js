@@ -44,7 +44,7 @@ module.exports = {
     }, function (e, user) {
       if (e) throw e;
       const decode = jwt.verify()
-      if (req.body.password === jwt.verify())
+      
     });
   }
 }
